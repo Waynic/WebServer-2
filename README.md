@@ -1,21 +1,27 @@
 WebServer
 =
-»ù±¾¹¦ÄÜ
+åŸºæœ¬åŠŸèƒ½
 -
-* ¿ÉÅäÖÃIPµØÖ·¡¢¼àÌý¶Ë¿ÚºÍÖ÷Ä¿Â¼
-* Ö§³Ö·þÎñµÄÆô¶¯ºÍ¹Ø±Õ
-* ¶ÔÃ¿¸öÇëÇóÄÜ¹»´´½¨µ¥¶ÀµÄÏìÓ¦Ïß³Ì
-* Ö§³Ö¶àÖÖÀàÐÍÎÄ¼þµÄÊä³ö£º
-		Í¼Æ¬£ºjpe, jpeg, jpg, gif, png
-		ÎÄ±¾£ºtxt, stm, htm, html, css, doc, docx
-		ÒôÆµ£ºmp3
-		ÆäËû£ºpdf
-		 
+* å¯é…ç½®IPåœ°å€ã€ç›‘å¬ç«¯å£å’Œä¸»ç›®å½•
+* æ”¯æŒæœåŠ¡çš„å¯åŠ¨å’Œå…³é—­
+* å¯¹æ¯ä¸ªè¯·æ±‚èƒ½å¤Ÿåˆ›å»ºå•ç‹¬çš„å“åº”çº¿ç¨‹
+* æ”¯æŒå¤šç§ç±»åž‹æ–‡ä»¶çš„è¾“å‡ºï¼š
 
-¸üÐÂ¼ÇÂ¼  
+		å›¾ç‰‡ï¼šjpe, jpeg, jpg, gif, png
+		æ–‡æœ¬ï¼štxt, stm, htm, html, css, doc, docx
+		éŸ³é¢‘ï¼šmp3
+		å…¶ä»–ï¼špdf
+
+æ›´æ–°è®°å½•  
 -
 ###V1.0.1
-2015Äê6ÔÂ10ÈÕ	ÐÞÕýÉèÖÃ»·½ÚµÄ¿ØÖÆÂß¼­
+2015å¹´6æœˆ10æ—¥	ä¿®æ­£è®¾ç½®çŽ¯èŠ‚çš„æŽ§åˆ¶é€»è¾‘
 
 ###V1.0.0
-2015Äê6ÔÂ10ÈÕ	ÕýÊ½°æ·¢²¼
+2015å¹´6æœˆ10æ—¥	æ­£å¼ç‰ˆå‘å¸ƒ
+
+åŒç»„æˆå‘˜
+-
+[zerotyj](https://github.com/zerotyj)<br/>
+[zzy1511065040](https://github.com/zzy1511065040)<br/>
+[glkwhr](https://github.com/glkwhr)<br/>
