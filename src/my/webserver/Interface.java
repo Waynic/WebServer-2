@@ -26,37 +26,75 @@ public class Interface extends JFrame {
 	public Interface(boolean[] status, int[] threadCount)
 	{
 		this.runFlag = status[0];
-		//this.threadCount = threadCount;
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setVisible(true);
 		
 		GridBagLayout layout;
 		
-		//设置frame的宽度, 高度；由 platform选择窗口的位置；固定窗口大小
+		//设置宽度, 高度；由 platform选择窗口的位置；固定窗口大小
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		setLocationByPlatform(true);
 		setResizable(true);
 		
-		//设置frame的icon和title
-		//Image img = kit.getImage("icon.gif");
-		//setIconImage(img);
+		//设置icon和title
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Image img = kit.getImage("icon.png");
+		setIconImage(img);
 		setTitle("WebServer");
 		
 		//设置菜单栏
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		setting = new JMenu("Setting");
-		menuBar.add(setting);
-		JMenuItem start = new JMenuItem("Start");
-		setting.add(start);
-		JMenuItem turn = new JMenuItem("Stop");
-		setting.add(turn);
+		file = new JMenu("File");
+		menuBar.add(file);
+		JMenuItem showLog = new JMenuItem("Log");
+		file.add(showLog);
+		//JMenuItem turn = new JMenuItem("Stop");
+		//file.add(turn);
 		JMenuItem quit = new JMenuItem("Quit");
-		setting.add(quit);
+		file.add(quit);
 		help = new JMenu("Help");
 		menuBar.add(help);
 		JMenuItem about = new JMenuItem("About");
 		help.add(about);
+		
+		//点击start
+		showLog.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			if(runFlag == true)
+				JOptionPane.showMessageDialog(	null, 
+												"Stop service first", 
+												"Error", 
+												0);
+			else
+			{
+				try { 
+					Runtime run = Runtime.getRuntime(); 
+				    run.exec("notepad .\\log.txt"); 
+			    } 
+			    catch (IOException e1) { 
+			    	e1.printStackTrace(); 
+			    } 
+			}
+			}
+		});
+		//点击quit
+		quit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(runFlag == true)
+					JOptionPane.showMessageDialog(	null, 
+													"Stop service first", 
+													"Error", 
+													0);
+				else
+					System.exit(0);
+			}
+		});
+		
+		//点击about
+		about.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "<html><p>Version V1.0.0<br>HUST@2015<br><a href=\"https://github.com/glkwhr/WebServer\">github.com/glkwhr/WebServer</a></p></html>", "About", 1);
+			}
+		});
 		
 		//设置内容面板
 		contentPane = new JPanel();
@@ -222,12 +260,7 @@ public class Interface extends JFrame {
 				}
 			}
 		});
-		//状态栏
-		//toolBar = new JToolBar();
-		//JLabel label=new JLabel("状态栏");//("共有"+threadCount[0]+"个线程正在执行");
-		//toolBar.add(label);//把标签加到工具栏上
-		//toolBar.setFloatable(false);
-		
+
 		//将组件加入网格, 用到GBC帮助类(GBC.java)
 		contentPane.add(ipLabel, new GBC(0, 0).setAnchor(GBC.WEST).setInsets(10,5,0,0));
 		contentPane.add(ipText, new GBC(1, 0).setFill(GBC.HORIZONTAL).setWeight(100, 0).setInsets(10,2,2,2));
@@ -330,8 +363,8 @@ public class Interface extends JFrame {
 	private JButton cleanBtn;		//清除log内容按钮
 	private JButton applyBtn;		//“应用”按钮
 	private JButton startBtn;		//“启动”按钮
-	private JMenu setting;
-	private JMenu help;
+	private JMenu file;			//“文件”菜单项
+	private JMenu help;			//“帮助”菜单项
 	private JFileChooser folderChooser;
 	//private JToolBar toolBar;
 	

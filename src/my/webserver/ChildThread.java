@@ -188,7 +188,7 @@ public class ChildThread extends Thread{
 	private void putLogToFile(String log) {
 		
 		String time = null;
-		String route = "C:\\Users\\Tangyingjie\\Desktop\\log\\log.txt";
+		String route = "log.txt";
 		try{
 			
 			FileWriter writer = new FileWriter(route, true);	//如果不存在会被创建
