@@ -238,9 +238,9 @@ public class Interface extends JFrame {
 		contentPane.add(folderBtn, new GBC(2, 2).setAnchor(GBC.CENTER).setInsets(2,0,2,5));
 		contentPane.add(logLabel, new GBC(0, 3).setAnchor(GBC.WEST).setInsets(10,5,0,0));
 		contentPane.add(logScrollPane, new GBC(0, 4).setSpan(3, 1).setFill(GBC.BOTH).setWeight(100, 100).setInsets(0,5,0,5));
-		contentPane.add(cleanBtn, new GBC(0, 5).setAnchor(GBC.CENTER).setInsets(5,5,0,0));
-		contentPane.add(applyBtn, new GBC(1, 5).setAnchor(GBC.CENTER).setInsets(5,5,0,0));
-		contentPane.add(startBtn, new GBC(1, 5).setSpan(2, 1).setAnchor(GBC.EAST).setInsets(5,0,0,5));
+		contentPane.add(cleanBtn, new GBC(0, 5).setAnchor(GBC.CENTER).setInsets(5,5,10,0));
+		contentPane.add(applyBtn, new GBC(1, 5).setAnchor(GBC.CENTER).setInsets(5,5,10,0));
+		contentPane.add(startBtn, new GBC(1, 5).setSpan(2, 1).setAnchor(GBC.EAST).setInsets(5,0,10,5));
 		//contentPane.add(toolBar,new GBC(0, 6).setSpan(3, 1).setAnchor(GBC.WEST).setInsets(15,5,0,5));
 		
 		//…Ë÷√÷˜Ã‚
