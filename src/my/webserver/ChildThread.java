@@ -16,6 +16,7 @@ public class ChildThread extends Thread{
 	int n;   //请求序号
 	int[] count; //线程数
 	boolean[] isRun; //当前服务正在运行
+	String CRLF = "\r\n";
 	Socket serverSocket; //服务器端的套接字
 	String fileRoute;	//客户机请求文件的路径
 	String resultLine;	//服务器对请求的处理结果
@@ -23,10 +24,6 @@ public class ChildThread extends Thread{
 	PrintStream output;	//送回客户机的字节流
 	String requestLine;	//保存请求报文的请求行
 	DateFormat fullDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-	//DateFormat fullDateFormat =
-			//DateFormat.getDateTimeInstance(
-			//DateFormat.FULL,
-			//DateFormat.FULL);
 	Date date = new Date();
 	
 	
@@ -62,12 +59,13 @@ public class ChildThread extends Thread{
 				requestLine = input.readLine(); //读取客户机发出的HTTP请求行
 				String clientIP = serverSocket.getInetAddress().toString().substring(1); //获取客户机IP地址
 				int clientPort = serverSocket.getPort();//获取客户机端口号
-				String clientInf = new String("[Connection " + n + "]\n" + 
-												clientIP + ": " + clientPort 
-												+ "\n" + requestLine + "\n"); //客户机信息
+				String clientInf = new String("[Connection " + n + "]" + CRLF
+												+ clientIP + ": " + clientPort 
+												+ CRLF + requestLine + CRLF); //客户机信息
 				ProcessRequest(); //获取请求处理结果并发送响应报文给客户机
 				String inf = new String(clientInf + resultLine);
 				text.append(inf);
+				putLogToFile(inf);		//	保存请求日志到文件中
 				text.setCaretPosition(text.getDocument().getLength());
 			//}			
 		}
@@ -81,9 +79,9 @@ public class ChildThread extends Thread{
 		String headLine = null;     //保存完整的响应报文
 		//响应报文内容
 		String statusLine = null;	//状态行
-		String closeLine = "Connection: close\n"; 
+		String closeLine = "Connection: close" + CRLF; 
 		String timeLine = null;    //首部行Date：发送响应报文的日期
-		String ServerLine = "Server: " + InetAddress.getLocalHost().getHostName() + "\n";
+		String ServerLine = "Server: " + InetAddress.getLocalHost().getHostName() + CRLF;
 		String lengthLine = null; //首部行 Content-Length：发送对象的字节数
 		String typeLine = null;	//首部行 Content-Type：实体主体中对象类型
 		String entityBody = null;	//实体主体
@@ -101,11 +99,11 @@ public class ChildThread extends Thread{
 				String type = getFileExtension(fileRoute);	//获取文件扩展名
 
 				//响应报文内容
-				statusLine = "HTTP/1.1 200 OK\n";
-				timeLine = "Date: " + fullDateFormat.format(date) + "\n";
-				lengthLine = "Content-Length: " + (new Integer(fileStream.available())).toString() + "\n";
-				typeLine = getContentType(type) + "\n";
-				headLine = statusLine + closeLine + timeLine + ServerLine + lengthLine + typeLine + "\n";
+				statusLine = "HTTP/1.1 200 OK" + CRLF;
+				timeLine = "Date: " + fullDateFormat.format(date) + CRLF;
+				lengthLine = "Content-Length: " + (new Integer(fileStream.available())).toString() + CRLF;
+				typeLine = getContentType(type) + CRLF;
+				headLine = statusLine + closeLine + timeLine + ServerLine + lengthLine + typeLine + CRLF;
 				output.print(headLine);				
 				
 				if( !(method.equals("HEAD")) ){
@@ -118,18 +116,18 @@ public class ChildThread extends Thread{
 				}
 				
 				fileStream.close();
-				resultLine = "Result: succeed!\n\n";
+				resultLine = "Result: succeed!" + CRLF + CRLF;
 			}
 			catch(IOException e){
 				//文件打开异常处理
-				statusLine = "HTTP/1.1 404 Not Found\n";
-				timeLine = "Date: " + fullDateFormat.format(date) + "\n";
-				headLine = statusLine + closeLine + timeLine + ServerLine + "\n";
+				statusLine = "HTTP/1.1 404 Not Found" + CRLF;
+				timeLine = "Date: " + fullDateFormat.format(date) + CRLF;
+				headLine = statusLine + closeLine + timeLine + ServerLine + CRLF;
 				output.print(headLine);
 				entityBody = "<HTML>" + "<HEAD><TITLE>404 Not Found</TITLE></HEAD>" +
 						"<BODY>404 Not Found" + "</BODY></HTML>\n";
 				output.write(entityBody.getBytes());
-				resultLine = "Result: file is not found!\n\n";
+				resultLine = "Result: file is not found!" + CRLF + CRLF;
 			}
 		}
 		
@@ -185,6 +183,22 @@ public class ChildThread extends Thread{
 		}
 		return contentType;
 	}
-
+	
+	//把日志写回本地文件
+	private void putLogToFile(String log) {
+		
+		String time = null;
+		String route = "C:\\Users\\Tangyingjie\\Desktop\\log\\log.txt";
+		try{
+			
+			FileWriter writer = new FileWriter(route, true);	//如果不存在会被创建
+			time = fullDateFormat.format(date) + CRLF;
+			writer.write(time + log);
+			writer.close();
+		}
+		catch(IOException ex){
+			ex.printStackTrace();
+		}
+	}
 }
 
