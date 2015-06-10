@@ -113,6 +113,7 @@ public class Interface extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				applyBtn.setEnabled(true);
+				setFlag = false;
 			}
 		});
 		//port文本框
@@ -124,6 +125,7 @@ public class Interface extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				applyBtn.setEnabled(true);
+				setFlag = false;
 			}
 		});
 		//folder文本框
@@ -160,6 +162,7 @@ public class Interface extends JFrame {
 					sltDir = folderChooser.getSelectedFile().toString();
 					folderText.setText(sltDir);
 				}
+				setFlag = false;
 				applyBtn.setEnabled(true);
 			}
 		});
